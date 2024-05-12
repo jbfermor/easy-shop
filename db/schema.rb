@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_12_101036) do
   enable_extension "plpgsql"
 
   create_table "bios", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "cif"
     t.string "name"
     t.string "surname1"
     t.string "surname2"
