@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Purchase lines</h1>
+
+<div id="purchase_lines">
+  <% @purchase_lines.each do |purchase_line| %>
+    <%= render purchase_line %>
+    <p>
+      <%= link_to "Show this purchase line", purchase_line %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New purchase line", new_purchase_line_path %>

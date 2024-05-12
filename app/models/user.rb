@@ -8,5 +8,6 @@ class User < ApplicationRecord
   has_many :suppliers
   has_many :products
   has_many :purchases, through: :suppliers
+  has_many :purchase_lines, through: :products
 
 end
