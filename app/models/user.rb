@@ -5,5 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_one :bio
-  
+  has_many :suppliers
+  has_many :products
+  has_many :purchases, through: :suppliers
+
 end
