@@ -1,0 +1,30 @@
+<div class="container mt-2">
+  <%= link_to "Nuevo proveedor", new_supplier_path, class: "btn btn-primary mt-3" %>
+  <table class="mt-3">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Persona de contacto</th>
+        <th>Teléfono</th>
+        <th>Mail</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @suppliers.each do |supplier|%>
+        <tr>
+          <td><%= supplier.name %></td>
+          <td><%= supplier.contact_person %></td>
+          <td><%= supplier.phone %></td>
+          <td><%= supplier.mail %></td>
+          <td>
+            <%= link_to 'Ver', supplier_path(supplier), class: 'btn btn-sm btn-info' %>
+            <%= link_to 'Editar', edit_supplier_path(supplier), class: 'btn btn-sm btn-warning' %>
+            <%= link_to 'Eliminar', supplier_path(supplier), method: :delete, class: 'btn btn-sm btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

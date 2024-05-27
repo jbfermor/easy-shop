@@ -1,14 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Purchases</h1>
-
-<div id="purchases">
-  <% @purchases.each do |purchase| %>
-    <%= render purchase %>
-    <p>
-      <%= link_to "Show this purchase", purchase %>
-    </p>
-  <% end %>
+<div class="container-fluid mt-2">
+  <div class="row">
+    <h1>Pedidos</h1>
+  </div>
+  <div class="row">
+    <%= render "purchases/table_purchases" %>
+  </div>
 </div>
-
-<%= link_to "New purchase", new_purchase_path %>

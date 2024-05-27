@@ -1,10 +1,18 @@
-<p style="color: green"><%= notice %></p>
+<div class="containr mt-2">
+  <div class="row mt-2">
+    <%= render @supplier %>
+  </div>
+  <div class="row mt-2 d-flex justify-content-center">
+    <div class="row">
+      <%= link_to "Editar", edit_supplier_path(@supplier), class: "btn btn-warning" %>
+    </div>
+    <div class="row">
+      <%= link_to "Eliminar", @supplier, method: :delete, class: "btn btn-danger" %>
+    </div>   
+  </div>
+    <div class="row">
+      <%= link_to "Atrás", suppliers_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>  
 
-<%= render @supplier %>
-
-<div>
-  <%= link_to "Edit this supplier", edit_supplier_path(@supplier) %> |
-  <%= link_to "Back to suppliers", suppliers_path %>
-
-  <%= button_to "Destroy this supplier", @supplier, method: :delete %>
-</div>

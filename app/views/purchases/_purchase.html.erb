@@ -1,22 +1,21 @@
-<div id="<%= dom_id purchase %>">
-  <p>
-    <strong>Purchase date:</strong>
-    <%= purchase.purchase_date %>
-  </p>
-
-  <p>
-    <strong>Total value:</strong>
-    <%= purchase.total_value %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= purchase.user_id %>
-  </p>
-
-  <p>
-    <strong>Supplier:</strong>
-    <%= purchase.supplier_id %>
-  </p>
-
+<div class="container mt-2">
+  <div id="<%= dom_id purchase %>">
+    <div class="card">
+      <table>
+        <tr>
+          <th>Fecha del pedido</th>
+        </tr>
+        <tr>
+          <td><%= purchase.purchase_date %></td>
+        </tr>
+        <tr>
+          <td colspan="3">Proveedor</td>
+        </tr>
+        <tr>
+          <td colspan="3"><%= Supplier.find(purchase.supplier_id).name %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
+

@@ -13,6 +13,7 @@ class PurchasesController < ApplicationController
   # GET /purchases/new
   def new
     @purchase = Purchase.new
+    @suppliers = current_user.suppliers
   end
 
   # GET /purchases/1/edit
@@ -22,16 +23,15 @@ class PurchasesController < ApplicationController
   # POST /purchases or /purchases.json
   def create
     @purchase = Purchase.new(purchase_params)
-
-    respond_to do |format|
-      if @purchase.save
-        format.html { redirect_to purchase_url(@purchase), notice: "Purchase was successfully created." }
-        format.json { render :show, status: :created, location: @purchase }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @purchase.errors, status: :unprocessable_entity }
-      end
+    @suppliers = current_user.suppliers
+    @purchase.user_id = current_user
+    if PurchaseFilledChecker.call(@purchase)
+      format.html { render :new, alert: "No se ha agregado ningún producto" }
+    else
+      create_respond
     end
+
+    
   end
 
   # PATCH/PUT /purchases/1 or /purchases/1.json
@@ -66,5 +66,17 @@ class PurchasesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def purchase_params
       params.require(:purchase).permit(:purchase_date, :total_value, :user_id, :supplier_id)
+    end
+
+    def create_respond
+      respond_to do |format|
+        if PurchaseFilledChecker.call(@purchase) and @purchase.save
+          format.html { redirect_to purchase_url(@purchase), notice: "Purchase was successfully created." }
+          format.json { render :show, status: :created, location: @purchase }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @purchase.errors, status: :unprocessable_entity }
+        end
+      end
     end
 end

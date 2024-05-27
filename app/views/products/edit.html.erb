@@ -1,10 +1,11 @@
-<h1>Editing product</h1>
-
-<%= render "form", product: @product %>
-
-<br>
-
-<div>
-  <%= link_to "Show this product", @product %> |
-  <%= link_to "Back to products", products_path %>
+<div class="container mt-2">
+  <div class="row">
+    <h1>Editar producto</h1>
+  </div>
+  <div class="row">
+    <%= render "form", product: @product %>
+  </div>
+  <div class="row mt-2">
+    <%= link_to "Atrás", products_path, class: "btn btn-secondary" %>
+  </div>
 </div>

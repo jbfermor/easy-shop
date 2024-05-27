@@ -22,6 +22,7 @@ class SuppliersController < ApplicationController
   # POST /suppliers or /suppliers.json
   def create
     @supplier = Supplier.new(supplier_params)
+    @supplier.user = current_user
 
     respond_to do |format|
       if @supplier.save

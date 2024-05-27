@@ -1,67 +1,71 @@
-<%= form_with(model: supplier) do |form| %>
-  <% if supplier.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(supplier.errors.count, "error") %> prohibited this supplier from being saved:</h2>
+<div class="container mt-2">
+  <div class="row">
+      <%= form_with(model: supplier) do |form| %>
+        <% if supplier.errors.any? %>
+          <div style="color: red">
+            <h2><%= pluralize(supplier.errors.count, "error") %> prohibited this supplier from being saved:</h2>
 
-      <ul>
-        <% supplier.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+            <ul>
+              <% supplier.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="row mt-2">
+          <%= form.label :name, class: "form-label" %>
+          <%= form.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="row mt-2">
+          <%= form.label :cif, class: "form-label" %>
+          <%= form.text_field :cif, class: "form-control" %>
+        </div>
+
+        <div class="row mt-2">
+          <%= form.label :address, class: "form-label" %>
+          <%= form.text_field :address, class: "form-control" %>
+        </div>
+
+        <div class="row mt-2">
+          <%= form.label :city, class: "form-label" %>
+          <%= form.text_field :city, class: "form-control" %>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-6">
+            <%= form.label :province, class: "form-label" %>
+            <%= form.text_field :province, class: "form-control" %>
+          </div>
+          <div class="col-6">
+            <div>
+              <%= form.label :postal_code, class: "form-label" %>
+              <%= form.text_field :postal_code, class: "form-control" %>
+            </div>
+          </div> 
+        </div>
+
+        <div class="row mt-2">
+          <%= form.label :contact_person, class: "form-label" %>
+          <%= form.text_field :contact_person, class: "form-control" %>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-6">
+            <%= form.label :phone, class: "form-label" %>
+            <%= form.text_field :phone, class: "form-control" %>
+          </div>
+          <div class="col-6">
+            <%= form.label :mail, class: "form-label" %>
+            <%= form.text_field :mail, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row mt-2"> 
+            <%= form.submit "Guardar", class: "btn btn-success" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+</div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :cif, style: "display: block" %>
-    <%= form.text_field :cif %>
-  </div>
-
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
-  </div>
-
-  <div>
-    <%= form.label :province, style: "display: block" %>
-    <%= form.text_field :province %>
-  </div>
-
-  <div>
-    <%= form.label :postal_code, style: "display: block" %>
-    <%= form.text_field :postal_code %>
-  </div>
-
-  <div>
-    <%= form.label :contact_person, style: "display: block" %>
-    <%= form.text_field :contact_person %>
-  </div>
-
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div>
-    <%= form.label :mail, style: "display: block" %>
-    <%= form.text_field :mail %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>

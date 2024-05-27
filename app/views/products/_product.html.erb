@@ -1,37 +1,36 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Name:</strong>
-    <%= product.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
-
-  <p>
-    <strong>Stock:</strong>
-    <%= product.stock %>
-  </p>
-
-  <p>
-    <strong>Active:</strong>
-    <%= product.active %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= product.user_id %>
-  </p>
-
-  <p>
-    <strong>Supplier:</strong>
-    <%= product.supplier_id %>
-  </p>
-
+<div class="container mt-2">
+  <div id="<%= dom_id product %>">
+    <div class="card">
+      <table>
+        <tr>
+          <th colspan="3">Nombre</th>
+        </tr>
+        <tr>
+          <td colspan="3"><%= product.name %></td>
+        </tr>
+        <tr>
+          <th colspan="3">Descripción</th>
+        </tr>
+        <tr>
+          <td colspan="3"><%= product.description %></td>
+        </tr>
+        <tr>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>¿Está activo?</th>
+        </tr>
+        <tr>
+          <td><%= product.price %></td>
+          <td><%= product.stock %></td>
+          <td><%= product_active?(product) %></td>
+        </tr>
+        <tr>
+          <td colspan="3">Proveedor</td>
+        </tr>
+        <tr>
+          <td colspan="3"><%= Supplier.find(product.supplier_id).name %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

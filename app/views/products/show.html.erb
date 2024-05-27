@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @product %>
-
-<div>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
-
-  <%= button_to "Destroy this product", @product, method: :delete %>
-</div>
+<div class="containr mt-2">
+  <div class="row mt-2">
+    <%= render @product %>
+  </div>
+  <div class="row mt-2 d-flex justify-content-center">
+    <div class="row">
+      <%= link_to "Editar", edit_product_path(@product), class: "btn btn-warning" %>
+    </div>
+    <div class="row">
+      <%= link_to "Eliminar", @product, method: :delete, class: "btn btn-danger" %>
+    </div>   
+  </div>
+    <div class="row mt-2">
+      <%= link_to "Atrás", products_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>  
