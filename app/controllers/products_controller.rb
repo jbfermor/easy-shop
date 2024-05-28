@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :check_pending_purchase
 
   # GET /products or /products.json
   def index
@@ -26,6 +27,9 @@ class ProductsController < ApplicationController
     @suppliers = current_user.suppliers
     @product = Product.new(product_params)
     @product.user_id = current_user.id
+    if @product.stock.blank?
+      @product.stock = 0
+    end
     respond_to do |format|
       if @product.save
         format.html { redirect_to product_url(@product), notice: "Product was successfully created." }

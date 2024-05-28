@@ -1,7 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :user
   belongs_to :supplier
-  has_rich_text :description
-  has_many :purchases
-  has_many :purchase_lines
+  has_many :purchases, dependent: :destroy
+  has_many :purchase_lines, dependent: :destroy
 end

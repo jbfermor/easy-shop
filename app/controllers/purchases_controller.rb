@@ -1,6 +1,6 @@
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: %i[ show edit update destroy ]
-
+  before_action :check_pending_purchase, except: %i[show destroy]
   # GET /purchases or /purchases.json
   def index
     @purchases = Purchase.all
@@ -13,6 +13,7 @@ class PurchasesController < ApplicationController
   # GET /purchases/new
   def new
     @purchase = Purchase.new
+    @purchase.purchase_date = Date.today
     @suppliers = current_user.suppliers
   end
 
@@ -24,11 +25,15 @@ class PurchasesController < ApplicationController
   def create
     @purchase = Purchase.new(purchase_params)
     @suppliers = current_user.suppliers
-    @purchase.user_id = current_user
-    if PurchaseFilledChecker.call(@purchase)
-      format.html { render :new, alert: "No se ha agregado ningún producto" }
-    else
-      create_respond
+    @purchase.user_id = current_user.id
+    respond_to do |format|
+      if @purchase.save
+        format.html { redirect_to purchase_url(@purchase), notice: "Purchase was successfully crated." }
+        format.json { render :show, status: :ok, location: @purchase }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @purchase.errors, status: :unprocessable_entity }
+      end
     end
 
     
@@ -65,7 +70,7 @@ class PurchasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purchase_params
-      params.require(:purchase).permit(:purchase_date, :total_value, :user_id, :supplier_id)
+      params.require(:purchase).permit(:purchase_date, :supplier_id)
     end
 
     def create_respond

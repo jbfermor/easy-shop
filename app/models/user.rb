@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_one :bio
-  has_many :suppliers
-  has_many :products
+  has_one :bio, dependent: :destroy
+  has_many :suppliers, dependent: :destroy
+  has_many :products, dependent: :destroy
   has_many :purchases, through: :suppliers
   has_many :purchase_lines, through: :products
 
